@@ -15,7 +15,21 @@ public class ProductRepository {
         productData.add(product);
         return product;
     }
+
     public Iterator<Product> findAll(){
         return productData.iterator();
+    }
+
+    public Product edit(Product product){
+        Iterator<Product> productIterator = productData.iterator();
+        while (productIterator.hasNext()) {
+            Product currentProduct = productIterator.next();
+            if (currentProduct.getProductId().equals(product.getProductId())) {
+                productData.remove(currentProduct);
+                productData.add(product);
+                return product;
+            }
+        }
+        return null;
     }
 }
