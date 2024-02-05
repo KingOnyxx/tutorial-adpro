@@ -43,12 +43,4 @@ public class ProductServiceImpl implements ProductService {
         }
         return null;
     }
-
-    @Override
-    public void delete(String id) {
-        Product product = productRepository.findById(id);
-        if (product.getProductId().equals(id)) {
-            productRepository.delete(id);
-        }
-    }
 }

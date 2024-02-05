@@ -46,9 +46,4 @@ public class ProductRepository {
         editedProduct.setProductQuantity(product.getProductQuantity());
         return editedProduct;
     }
-    public void delete(String id){
-        if (Integer.parseInt(id) <= productData.size()){
-            productData.remove(Integer.parseInt(id)-1);
-        }
-    }
 }

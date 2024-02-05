@@ -50,9 +50,4 @@ public class ProductController {
         return "redirect:/product/list";
     }
 
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Object> deleteProduct(@PathVariable("id") String id) {
-        service.delete(id);
-        return ResponseEntity.ok().build();
-    }
 }
