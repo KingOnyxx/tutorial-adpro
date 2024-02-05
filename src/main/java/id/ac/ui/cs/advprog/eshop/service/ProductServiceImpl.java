@@ -42,13 +42,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product edit(Product product) {
+    public Product edit(Product product, String id) {
         Iterator<Product> productIterator = productRepository.findAll();
         while (productIterator.hasNext()) {
             Product currentProduct = productIterator.next();
-            if (currentProduct.getProductId().equals(product.getProductId())) {
-                productRepository.edit(currentProduct);
-                return product;
+            if (currentProduct.getProductId().equals(id)) {
+                productRepository.edit(product,id);
+                return currentProduct;
             }
         }
         return null;

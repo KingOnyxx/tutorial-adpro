@@ -13,6 +13,7 @@ public class ProductRepository {
 
     public Product create(Product product){
         productData.add(product);
+        product.setProductId(String.valueOf(productData.size()));
         return product;
     }
 
@@ -20,16 +21,10 @@ public class ProductRepository {
         return productData.iterator();
     }
 
-    public Product edit(Product product){
-        Iterator<Product> productIterator = productData.iterator();
-        while (productIterator.hasNext()) {
-            Product currentProduct = productIterator.next();
-            if (currentProduct.getProductId().equals(product.getProductId())) {
-                productData.remove(currentProduct);
-                productData.add(product);
-                return product;
-            }
-        }
-        return null;
+    public Product edit(Product product, String id){
+        Product editedProduct = productData.get(Integer.parseInt(id)-1);
+        editedProduct.setProductName(product.getProductName());
+        editedProduct.setProductQuantity(product.getProductQuantity());
+        return editedProduct;
     }
 }
