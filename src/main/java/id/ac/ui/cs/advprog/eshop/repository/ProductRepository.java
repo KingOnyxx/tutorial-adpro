@@ -19,7 +19,6 @@ public class ProductRepository {
 
     public Product findById(String id){
         int index = Integer.parseInt(id);
-        if (index <= productData.size()){
             int min = 0;
             int max = productData.size() - 1;
             while (min <= max) {
@@ -32,23 +31,21 @@ public class ProductRepository {
                     return productData.get(mid);
                 }
             }
+            return null;
         }
-        return null;
-    }
     
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
 
     public Product edit(Product product, String id){
-        Product editedProduct = productData.get(Integer.parseInt(id)-1);
+        Product editedProduct = findById(id);
         editedProduct.setProductName(product.getProductName());
         editedProduct.setProductQuantity(product.getProductQuantity());
         return editedProduct;
     }
     public void delete(String id){
-        if (Integer.parseInt(id) <= productData.size()){
-            productData.remove(Integer.parseInt(id)-1);
-        }
+        Product deletedProduct = findById(id);
+        productData.remove(deletedProduct);
     }
 }
