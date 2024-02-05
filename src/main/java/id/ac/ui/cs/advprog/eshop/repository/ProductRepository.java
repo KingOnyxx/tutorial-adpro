@@ -13,9 +13,39 @@ public class ProductRepository {
 
     public Product create(Product product){
         productData.add(product);
+        product.setProductId(String.valueOf(productData.size()));
         return product;
     }
+
+    public Product findById(String id){
+        int index = Integer.parseInt(id);
+            int min = 0;
+            int max = productData.size() - 1;
+            while (min <= max) {
+                int mid = (min + max) / 2;
+                if (index > Integer.parseInt(productData.get(mid).getProductId())) {
+                    min = mid + 1;
+                } else if (index < Integer.parseInt(productData.get(mid).getProductId())) {
+                    max = mid - 1;
+                } else {
+                    return productData.get(mid);
+                }
+            }
+            return null;
+        }
+    
     public Iterator<Product> findAll(){
         return productData.iterator();
+    }
+
+    public Product edit(Product product, String id){
+        Product editedProduct = findById(id);
+        editedProduct.setProductName(product.getProductName());
+        editedProduct.setProductQuantity(product.getProductQuantity());
+        return editedProduct;
+    }
+    public void delete(String id){
+        Product deletedProduct = findById(id);
+        productData.remove(deletedProduct);
     }
 }

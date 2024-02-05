@@ -22,10 +22,31 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public Product findById(String id) {
+        return productRepository.findById(id);
+    }
+    
+    @Override
     public List<Product> findAll() {
         Iterator<Product> productIterator = productRepository.findAll();
         List<Product> allProducts = new ArrayList<>();
         productIterator.forEachRemaining(allProducts::add);
         return allProducts;
+    }
+
+    @Override
+    public void edit(Product product, String id) {
+        Product currentProduct = productRepository.findById(id);
+        if (currentProduct.getProductId().equals(id)) {
+            productRepository.edit(product,id);
+        }
+    }
+
+    @Override
+    public void delete(String id) {
+        Product product = productRepository.findById(id);
+        if (product.getProductId().equals(id)) {
+            productRepository.delete(id);
+        }
     }
 }
