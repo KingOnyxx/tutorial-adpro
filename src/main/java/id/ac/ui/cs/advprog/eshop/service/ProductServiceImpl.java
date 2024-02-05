@@ -23,16 +23,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product findById(String id) {
-        Iterator<Product> productIterator = productRepository.findAll();
-        while (productIterator.hasNext()) {
-            Product product = productIterator.next();
-            if (product.getProductId().equals(id)) {
-                return product;
-            }
-        }
-        return null;
+        return productRepository.findById(id);
     }
-
+    
     @Override
     public List<Product> findAll() {
         Iterator<Product> productIterator = productRepository.findAll();
@@ -43,14 +36,19 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public Product edit(Product product, String id) {
-        Iterator<Product> productIterator = productRepository.findAll();
-        while (productIterator.hasNext()) {
-            Product currentProduct = productIterator.next();
-            if (currentProduct.getProductId().equals(id)) {
-                productRepository.edit(product,id);
-                return currentProduct;
-            }
+        Product currentProduct = productRepository.findById(id);
+        if (currentProduct.getProductId().equals(id)) {
+            productRepository.edit(product,id);
+            return currentProduct;
         }
         return null;
+    }
+
+    @Override
+    public void delete(String id) {
+        Product product = productRepository.findById(id);
+        if (product.getProductId().equals(id)) {
+            productRepository.delete(id);
+        }
     }
 }

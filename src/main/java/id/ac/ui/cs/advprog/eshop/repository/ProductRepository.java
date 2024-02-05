@@ -17,6 +17,25 @@ public class ProductRepository {
         return product;
     }
 
+    public Product findById(String id){
+        int index = Integer.parseInt(id);
+        if (index <= productData.size()){
+            int min = 0;
+            int max = productData.size() - 1;
+            while (min <= max) {
+                int mid = (min + max) / 2;
+                if (index > Integer.parseInt(productData.get(mid).getProductId())) {
+                    min = mid + 1;
+                } else if (index < Integer.parseInt(productData.get(mid).getProductId())) {
+                    max = mid - 1;
+                } else {
+                    return productData.get(mid);
+                }
+            }
+        }
+        return null;
+    }
+    
     public Iterator<Product> findAll(){
         return productData.iterator();
     }
@@ -26,5 +45,10 @@ public class ProductRepository {
         editedProduct.setProductName(product.getProductName());
         editedProduct.setProductQuantity(product.getProductQuantity());
         return editedProduct;
+    }
+    public void delete(String id){
+        if (Integer.parseInt(id) <= productData.size()){
+            productData.remove(Integer.parseInt(id)-1);
+        }
     }
 }
