@@ -45,7 +45,7 @@ tasks.register<Test>("unitTest") {
 	group = "verification"
 
 	filter {
-		excludeTestMatching("*FunctionalTest")
+		excludeTestsMatching("*FunctionalTest")
 	}
 }
 
@@ -54,10 +54,10 @@ tasks.register<Test>("functionalTest") {
 	group = "verification"
 
 	filter {
-		includeTestMatching("*FunctionalTest")
+		includeTestsMatching("*FunctionalTest")
 	}
 }
 
-tasks.withType<Test>.configureEach {
+tasks.withType<Test>().configureEach {
 	useJUnitPlatform()
 }

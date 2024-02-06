@@ -20,10 +20,10 @@ public class ProductServiceImpl implements ProductService {
         productRepository.create(product);
         return product;
     }
-
+    
     @Override
     public Product findById(String id) {
-        return productRepository.findById(id);
+        return productRepository.findProductById(id);
     }
     
     @Override
@@ -36,17 +36,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public void edit(Product product, String id) {
-        Product currentProduct = productRepository.findById(id);
-        if (currentProduct.getProductId().equals(id)) {
-            productRepository.edit(product,id);
-        }
+        productRepository.edit(product,id);
     }
 
     @Override
     public void delete(String id) {
-        Product product = productRepository.findById(id);
-        if (product.getProductId().equals(id)) {
-            productRepository.delete(id);
-        }
+        productRepository.delete(id);
     }
 }
