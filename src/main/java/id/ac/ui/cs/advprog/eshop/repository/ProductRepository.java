@@ -18,21 +18,13 @@ public class ProductRepository {
     }
 
     public Product findById(String id){
-        int index = Integer.parseInt(id);
-            int min = 0;
-            int max = productData.size() - 1;
-            while (min <= max) {
-                int mid = (min + max) / 2;
-                if (index > Integer.parseInt(productData.get(mid).getProductId())) {
-                    min = mid + 1;
-                } else if (index < Integer.parseInt(productData.get(mid).getProductId())) {
-                    max = mid - 1;
-                } else {
-                    return productData.get(mid);
-                }
+        for (Product product : productData) {
+            if (product.getProductId().equals(id)) {
+                return product;
             }
-            return null;
         }
+        return null;
+    }
     
     public Iterator<Product> findAll(){
         return productData.iterator();
