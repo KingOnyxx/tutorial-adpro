@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.UUID;
 
 @Repository
 public class ProductRepository {
@@ -13,17 +14,29 @@ public class ProductRepository {
 
     public Product create(Product product){
         productData.add(product);
-        product.setProductId(String.valueOf(productData.size()));
+        if (product.getProductId()==null){
+            product.setProductId(String.valueOf(UUID.randomUUID()));
+        }
         return product;
     }
 
-    public Product findById(String id){
+    public int findById(String id){
         for (Product product : productData) {
             if (product.getProductId().equals(id)) {
-                return product;
+                return productData.indexOf(product);
             }
         }
-        return null;
+        return -1;
+    }
+
+    public Product findProductById(String id){
+        int index = findById(id);
+        if (index != -1){
+            return productData.get(index);
+        }
+        else{
+            return null;
+        }
     }
     
     public Iterator<Product> findAll(){
@@ -31,13 +44,13 @@ public class ProductRepository {
     }
 
     public Product edit(Product product, String id){
-        Product editedProduct = findById(id);
+        Product editedProduct = findProductById(id);
         editedProduct.setProductName(product.getProductName());
         editedProduct.setProductQuantity(product.getProductQuantity());
         return editedProduct;
     }
     public void delete(String id){
-        Product deletedProduct = findById(id);
+        Product deletedProduct = findProductById(id);
         productData.remove(deletedProduct);
     }
 }
