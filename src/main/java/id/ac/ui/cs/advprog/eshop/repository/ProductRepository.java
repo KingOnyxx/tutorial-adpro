@@ -13,10 +13,8 @@ public class ProductRepository {
     private List<Product> productData = new ArrayList<>();
 
     public Product create(Product product){
-        productData.add(product);
-        if (product.getProductId()==null){
-            product.setProductId(String.valueOf(UUID.randomUUID()));
-        }
+        productData.add(productData.size(), product);
+        product.setProductId(product.getProductId() == null ? String.valueOf(UUID.randomUUID()) : product.getProductId());
         return product;
     }
 
@@ -26,17 +24,11 @@ public class ProductRepository {
                 return productData.indexOf(product);
             }
         }
-        return -1;
+        return 0;
     }
 
     public Product findProductById(String id){
-        int index = findById(id);
-        if (index != -1){
-            return productData.get(index);
-        }
-        else{
-            return null;
-        }
+        return productData.get(findById(id));
     }
     
     public Iterator<Product> findAll(){

@@ -56,12 +56,3 @@ public class ProductController {
         return ResponseEntity.ok().build();
     }
 }
-
-@Controller
-class HomeController {
-    @GetMapping("/")
-    public String home(Model model) {
-        model.addAttribute("message", "Welcome");
-        return "homePage";
-    }
-}
