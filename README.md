@@ -16,3 +16,12 @@ Reflection 2
 1. After making the unit test, i feel confident in my code's functionality. The number of unit tests in a class can vary depending on the complexity of the class. It is best to have enough tests to cover different scenarios and edge cases. While having 100% code coverage is good, it does not guarantee that there are no bugs or errors in the code. It only indicates that all lines of code have been executed at least once during testing without errors or bugs.
 
 2. I dont think the code is considered clean and could possibly reduce the code quality. If it were to happen, there could be code duplication, Low cohesion between each class, and high coupling. Code duplication can lead to harder maintenance. Low cohesion is If a class is doing too much or not well-defined, it can become harder to understand and difficult to maintain. High Coupling is when you change something in one class and the other class needs to change because of you changed something in the first class. High coupling can make the code more fragile and harder to be developed. I would suggest using encapsulation, single responsibility principle, descriptive names, code formatting, and refactoring. These practices can help to make code cleaner, readable and easy to maintain.
+
+TUTORIAL 2
+---
+Reflection 
+1. Code quality issues that i have encountered and fixed during the tutorial:
+    - There were unused imports in the code. I fixed it by removing the unused imports.
+    - There was an error in ProductControllerTest.java because i have 2 classes (HomeController and ProductController). I fixed it by seperating them into 2 files.
+
+2. In my opinion, my CI/CD workflow implementation has met the definition of CI/CD because when pushed to the github repository, the code will be automatically built and tested using unit test. The code will also be checked for cleanliness. If the code is clean and passes the tests, it will be deployed to the koyeb server. This process is done automatically and continuously.
