@@ -39,7 +39,7 @@ public class ProductControllerTest {
     public void testCreateProductPage() {
         // Test the createProductPage method
         String result = productController.createProductPage(model);
-        assertEquals("createProduct", result);
+        assertEquals("CreateProduct", result);
     }
 
     @Test
@@ -59,7 +59,7 @@ public class ProductControllerTest {
         when(productService.findAll()).thenReturn(productList);
         //model.addAttribute("products", productList);
         String result = productController.productListPage(model);
-        assertEquals("productList", result);
+        assertEquals("ProductList", result);
         verify(model, times(1)).addAttribute("products", productList);
     }
 
@@ -71,7 +71,7 @@ public class ProductControllerTest {
         when(productService.findById(id)).thenReturn(product);
         //model.addAttribute("product", product);
         String result = productController.editProductPage(id, model);
-        assertEquals("editProduct", result);
+        assertEquals("EditProduct", result);
         verify(model, times(1)).addAttribute("product", product);
     }
 

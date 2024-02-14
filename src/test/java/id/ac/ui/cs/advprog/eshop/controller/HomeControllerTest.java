@@ -28,6 +28,6 @@ public class HomeControllerTest {
         model.addAttribute("message", "Welcome");
         String viewName = homeController.home(model);
 
-        assertEquals("homePage", viewName);
+        assertEquals("HomePage", viewName);
     }
 }
