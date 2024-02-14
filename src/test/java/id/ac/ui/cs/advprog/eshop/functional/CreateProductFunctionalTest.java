@@ -1,6 +1,5 @@
 package id.ac.ui.cs.advprog.eshop.functional;
 
-import id.ac.ui.cs.advprog.eshop.model.Product;
 import io.github.bonigarcia.seljup.SeleniumJupiter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.MethodOrderer;
