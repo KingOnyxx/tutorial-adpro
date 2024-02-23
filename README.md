@@ -25,3 +25,29 @@ Reflection
     - There was an error in ProductControllerTest.java because i have 2 classes (HomeController and ProductController). I fixed it by seperating them into 2 files.
 
 2. In my opinion, my CI/CD workflow implementation has met the definition of CI/CD because when pushed to the github repository, the code will be automatically built and tested using unit test. The code will also be checked for cleanliness. If the code is clean and passes the tests, it will be deployed to the koyeb server. This process is done automatically and continuously.
+
+TUTORIAL 3
+---
+Reflection
+1. SOLID principles that i have applied in my code:
+    - Single Responsibility Principle
+    - Interface Segregation Principle
+    - Dependency Inversion Principle
+2. The benefits of using SOLID principles in my code:
+    - The code is easier to maintain and extend.
+        * I can easily add new features to the application without changing the existing code.
+    - The code is easier to understand and read.
+        * I can understand the code that i have made more easily because the code is more organized and structured.
+    - The code is more flexible and reusable.
+        * I can reuse FindById method in different parts of the application.
+    - The code is more testable and has fewer bugs.
+        * I have seperated testing for HomeController and ProductController.
+3. The disadvantage of not using SOLID principles in my code:
+    - The code is harder to maintain and extend.
+        * I have to change the existing code to add new features to the application.
+    - The code is harder to understand and read.
+        * I have to spend more time to understand the code that i have made.
+    - The code is less flexible and reusable.
+        * I can't reuse FindById method in different parts of the application.
+    - The code is less testable and has more bugs.
+        * There will be error because if i didn't seperate them, one of them wouldn't be found when testing.
