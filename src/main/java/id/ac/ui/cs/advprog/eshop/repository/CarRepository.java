@@ -24,13 +24,17 @@ public class CarRepository {
         return carData.iterator();
     }
 
-    public Car findById(String carId){
+    public int findById(String carId){
         for (Car car : carData) {
             if (car.getCarId().equals(carId)) {
-                return car;
+                return carData.indexOf(car);
             }
         }
-        return null;
+        return 0;
+    }
+
+    public Car findCarById(String carId){
+        return carData.get(findById(carId));
     }
 
     public Car update(String id, Car updatedCar){
