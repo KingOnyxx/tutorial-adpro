@@ -32,7 +32,7 @@ public class OrderRepositoryTest {
         orders.add(order1);
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078", products, 1708560000L, "Safira Sudrajat");
         orders.add(order2);
-        Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697eccbf1e", products, 1708560000L, "Safira Sudrajat");
+        Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697eccbf1e", products, 1708560000L, "Bambang Sudrajat");
         orders.add(order3);
     }
 
@@ -61,7 +61,6 @@ public class OrderRepositoryTest {
         assertEquals(order.getId(), findResult.getId());
         assertEquals(order.getOrderTime(), findResult.getOrderTime());
         assertEquals(order.getAuthor(), findResult.getAuthor());
-        assertEquals(order.getStatus(), findResult.getStatus());
         assertEquals(OrderStatus.SUCCESS.getValue(), findResult.getStatus());
     }
 
@@ -90,12 +89,12 @@ public class OrderRepositoryTest {
 
     @Test
     void testFindAllByAuthorIfAuthorCorrrect() {
-        for (Order order :orders){
+        for (Order order : orders){
             orderRepository.save(order);
         }
 
-        List<Order> findResult = orderRepository.findAllByAuthor(orders.get(1).getAuthor());
-        assertEquals(2, findResult.size());
+        List<Order> orderList = orderRepository.findAllByAuthor(orders.get(1).getAuthor());
+        assertEquals(2, orderList.size());
     }
 
     @Test
