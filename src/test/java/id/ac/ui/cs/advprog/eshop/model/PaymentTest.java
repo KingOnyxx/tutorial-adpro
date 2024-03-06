@@ -88,7 +88,8 @@ public class PaymentTest {
     void testCreatePaymentEmptyOrderBank() {
         this.order = null;
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("bankName", "01");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         });
@@ -96,7 +97,8 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidMethodBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("bankName", "01");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order, "", paymentData);
         });
@@ -105,7 +107,8 @@ public class PaymentTest {
     @Test
     void testCreatePaymentSuccessStatusBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("bankName", "01");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
@@ -116,7 +119,8 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidStatusBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("bankName", "");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order, "", paymentData);
         });
@@ -125,7 +129,8 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("bankName", "");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         });

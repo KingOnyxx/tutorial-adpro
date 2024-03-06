@@ -44,11 +44,13 @@ public class PaymentRepositoryTest {
         payments.add(new Payment(order1, "VOUCHER", paymentData));
         Order order2 = new Order("7f9e15bb-4b15-42f4-aebc-c3af385fb078", products, 1708560000L, "Safira Sudrajat");
         orders.add(order2);
-        paymentData.put("bankName", "01");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         payments.add(new Payment(order2, "BANK", paymentData));
         Order order3 = new Order("e334ef40-9eff-4da8-9487-8ee697eccbf1e", products, 1708560000L, "Bambang Sudrajat");
         orders.add(order3);
-        paymentData.put("bankName", "01");
+        paymentData.put("bankName", "abc");
+        paymentData.put("referenceCode", "01");
         payments.add(new Payment(order3, "BANK", paymentData));
     }
 

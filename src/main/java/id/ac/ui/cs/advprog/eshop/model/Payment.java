@@ -21,7 +21,7 @@ public class Payment {
         }
         if (paymentData != null) {
             if (method.equals(PaymentMethod.BANK.getValue())) {
-                if (paymentData.get("bankName").isEmpty()) {
+                if (paymentData.get("bankName").isEmpty() || paymentData.get("referenceCode").isEmpty()) {
                     throw new IllegalArgumentException();
                 }
             } else if (method.equals(PaymentMethod.VOUCHER.getValue())) {
