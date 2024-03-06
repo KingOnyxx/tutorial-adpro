@@ -4,6 +4,7 @@ import lombok.Getter;
 import java.util.Map;
 import java.util.UUID;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 
 @Getter 
@@ -19,11 +20,11 @@ public class Payment {
             throw new IllegalArgumentException();
         }
         if (paymentData != null) {
-            if (method.equals("BANK")) {
+            if (method.equals(PaymentMethod.BANK.getValue())) {
                 if (paymentData.get("bankName").isEmpty()) {
                     throw new IllegalArgumentException();
                 }
-            } else if (method.equals("VOUCHER")) {
+            } else if (method.equals(PaymentMethod.VOUCHER.getValue())) {
                 if (paymentData.get("voucherCode").isEmpty() || !   isVoucherValid(paymentData.get("voucherCode"))) {
                     throw new IllegalArgumentException();
                 }

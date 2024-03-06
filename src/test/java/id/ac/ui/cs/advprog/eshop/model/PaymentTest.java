@@ -3,6 +3,7 @@ package id.ac.ui.cs.advprog.eshop.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentMethod;
 import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,7 +40,7 @@ public class PaymentTest {
         this.order = null;
         
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.order,"VOUCHER", null);
+            Payment payment = new Payment(this.order,PaymentMethod.VOUCHER.getValue(), null);
         });
     }
     
@@ -57,7 +58,7 @@ public class PaymentTest {
     void testCreatePaymentSuccessStatus() {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("voucherCode", "ESHOP12345678ABC");
-        Payment payment = new Payment(this.order,"VOUCHER", paymentData);
+        Payment payment = new Payment(this.order,PaymentMethod.VOUCHER.getValue(), paymentData);
         payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
@@ -78,7 +79,7 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("voucherCode", "");
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.order,"VOUCHER", paymentData);
+            Payment payment = new Payment(this.order,PaymentMethod.VOUCHER.getValue(), paymentData);
         });
     }
 
@@ -89,7 +90,7 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("bankName", "01");
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.order, "BANK", paymentData);
+            Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         });
     }
     @Test
@@ -105,7 +106,7 @@ public class PaymentTest {
     void testCreatePaymentSuccessStatusBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("bankName", "01");
-        Payment payment = new Payment(this.order, "BANK", paymentData);
+        Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
         assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
@@ -126,7 +127,7 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("bankName", "");
         assertThrows(IllegalArgumentException.class, () -> {
-            Payment payment = new Payment(this.order, "BANK", paymentData);
+            Payment payment = new Payment(this.order, PaymentMethod.BANK.getValue(), paymentData);
         });
     }
 }
