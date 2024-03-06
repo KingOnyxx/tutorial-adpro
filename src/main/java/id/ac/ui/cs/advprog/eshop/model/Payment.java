@@ -43,6 +43,13 @@ public class Payment {
 
         this.status = status;
     }
+    public void setId(String id) {
+        if (id.isEmpty()) {
+            throw new IllegalArgumentException();
+        }
+
+        this.id = id;
+    }
 
     private boolean isVoucherValid(String str) {
         if (str == null || str.length() != 16) {

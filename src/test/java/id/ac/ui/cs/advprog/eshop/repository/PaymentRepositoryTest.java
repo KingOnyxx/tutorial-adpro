@@ -14,7 +14,7 @@ import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 
-public class PaymentRepository {
+public class PaymentRepositoryTest {
 
     PaymentRepository paymentRepository;
     
@@ -36,6 +36,7 @@ public class PaymentRepository {
         Map<String, String> paymentData = new HashMap<String, String>();
 
         orders = new ArrayList<>();
+        payments = new ArrayList<>();
         Order order1 = new Order("13652556-012a-4c07-b546-54eb1396d79b", products, 1708560000L, "Safira Sudrajat");
         orders.add(order1);
         paymentData.put("voucherCode", "ESHOP12345678ABC");
@@ -54,9 +55,8 @@ public class PaymentRepository {
     void testAddpayment() {
         Order order = orders.get(1);
         Payment payment = payments.get(1);
-        Payment result = orderRepository.addPayment(order);
-
-        assertEquals(payment.getId(), result.getId());
+        Payment result = paymentRepository.addPayment(order, payment.getMethod(), payment.getPaymentData());
+        paymentRepository.setId(result, payment.getId());
         assertEquals(payment.getMethod(), result.getMethod());
         assertEquals(payment.getStatus(), result.getStatus());
         assertEquals(payment.getPaymentData(), result.getPaymentData());
@@ -72,8 +72,9 @@ public class PaymentRepository {
     @Test
     void testUpdateStatusSuccess() {
         Payment payment = payments.get(1);
-        paymentRepository.addPayment(payment);
-        paymentRepository.setStatus(payment.getId(), "SUCCESS");
+        Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+        paymentRepository.setId(result, payment.getId());
+        paymentRepository.setStatus(result, "SUCCESS");
         
         Payment findResult = paymentRepository.getPayment(payments.get(1).getId());
         Order findOrder = findResult.getOrder();
@@ -84,19 +85,21 @@ public class PaymentRepository {
     @Test
     void testUpdateStatusRejected() {
         Payment payment = payments.get(1);
-        payment.save(payment);
-        PaymentRepository.setStatus(payment.getId(), "REJECTED");
-        
-        Payment findResult = paymentRepository.findById(payments.get(1).getId());
+        Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+        paymentRepository.setId(result, payment.getId());
+        paymentRepository.setStatus(result, "REJECTED");
+
+        Payment findResult = paymentRepository.getPayment(payments.get(1).getId());
         Order findOrder = findResult.getOrder();
-        assertEquals("FAILED", findResult.getStatus());
+        assertEquals("FAILED", findOrder.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), findOrder.getStatus());
     }
 
     @Test
     void testGetPaymentIfIdFound() {
         for (Payment payment : payments){
-            paymentRepository.addPayment(payment);
+            Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+            paymentRepository.setId(result, payment.getId());
         }
 
         Payment findResult = paymentRepository.getPayment(payments.get(1).getId());
@@ -114,7 +117,8 @@ public class PaymentRepository {
     @Test
     void testGetPaymentIfIdNotFound() {
         for (Payment payment : payments){
-            paymentRepository.addPayment(payment);
+            Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+            paymentRepository.setId(result, payment.getId());
         }
 
         Payment findResult = paymentRepository.getPayment("zczc");
@@ -122,22 +126,23 @@ public class PaymentRepository {
     }
 
     @Test
-    void testGetAllPaymentsIfIdFound() {
+    void testGetAllPayments() {
         for (Payment payment : payments){
-            paymentRepository.addPayment(payment);
+            Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
+            paymentRepository.setId(result, payment.getId());
         }
 
-        List<Payment> findResult = paymentRepository.getAllPayments();
+        List<Payment> findResult = paymentRepository.getAllPayment();
         assertEquals(3, findResult.size());
-        assertEquals(payments.get(1).getId(), findResult.get(0).getId());
-        assertEquals(payments.get(1).getMethod(), findResult.get(0).getMethod());
-        assertEquals(payments.get(1).getStatus(), findResult.get(0).getStatus());
-        assertEquals(payments.get(1).getPaymentData(), findResult.get(0).getPaymentData());
+
+        assertEquals(payments.get(0).getMethod(), findResult.get(0).getMethod());
+        assertEquals(payments.get(0).getStatus(), findResult.get(0).getStatus());
+        assertEquals(payments.get(0).getPaymentData(), findResult.get(0).getPaymentData());
         Order findOrder = findResult.get(0).getOrder();
-        assertEquals(orders.get(1).getId(), findOrder.getId());
-        assertEquals(orders.get(1).getOrderTime(), findOrder.getOrderTime());
-        assertEquals(orders.get(1).getAuthor(), findOrder.getAuthor());
-        assertEquals(orders.get(1).getStatus(), findOrder.getStatus());
+        assertEquals(orders.get(0).getId(), findOrder.getId());
+        assertEquals(orders.get(0).getOrderTime(), findOrder.getOrderTime());
+        assertEquals(orders.get(0).getAuthor(), findOrder.getAuthor());
+        assertEquals(orders.get(0).getStatus(), findOrder.getStatus());
     }   
 }
 
