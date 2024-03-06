@@ -1,5 +1,6 @@
 package id.ac.ui.cs.advprog.eshop.repository;
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import java.util.List;
@@ -18,10 +19,10 @@ public class PaymentRepository {
 
     public Payment setStatus(Payment payment, String status) {
         payment.setStatus(status);
-        if (status.equals("SUCCESS")){
+        if (status.equals(PaymentStatus.SUCCESS.getValue())){
             payment.getOrder().setStatus(OrderStatus.SUCCESS.getValue());
         }
-        if (status.equals("REJECTED")) {
+        if (status.equals(PaymentStatus.REJECTED.getValue())){
             payment.getOrder().setStatus(OrderStatus.FAILED.getValue());
         }
         return payment;

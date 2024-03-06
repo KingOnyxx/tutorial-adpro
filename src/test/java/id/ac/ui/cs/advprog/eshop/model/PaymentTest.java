@@ -3,6 +3,8 @@ package id.ac.ui.cs.advprog.eshop.model;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -56,9 +58,9 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("voucherCode", "ESHOP12345678ABC");
         Payment payment = new Payment(this.order,"VOUCHER", paymentData);
-        payment.setStatus("SUCCESS");
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertSame(this.order, payment.getOrder());
     }
 
@@ -104,9 +106,9 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("bankName", "01");
         Payment payment = new Payment(this.order, "BANK", paymentData);
-        payment.setStatus("SUCCESS");
+        payment.setStatus(PaymentStatus.SUCCESS.getValue());
 
-        assertEquals("SUCCESS", payment.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), payment.getStatus());
         assertSame(this.order, payment.getOrder());
     }
 

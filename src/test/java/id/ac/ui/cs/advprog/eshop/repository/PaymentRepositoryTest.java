@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import id.ac.ui.cs.advprog.eshop.enums.OrderStatus;
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
 import id.ac.ui.cs.advprog.eshop.model.Order;
 import id.ac.ui.cs.advprog.eshop.model.Payment;
 
@@ -74,11 +75,11 @@ public class PaymentRepositoryTest {
         Payment payment = payments.get(1);
         Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
         paymentRepository.setId(result, payment.getId());
-        paymentRepository.setStatus(result, "SUCCESS");
+        paymentRepository.setStatus(result, PaymentStatus.SUCCESS.getValue());
         
         Payment findResult = paymentRepository.getPayment(payments.get(1).getId());
         Order findOrder = findResult.getOrder();
-        assertEquals("SUCCESS", findResult.getStatus());
+        assertEquals(PaymentStatus.SUCCESS.getValue(), findResult.getStatus());
         assertEquals(OrderStatus.SUCCESS.getValue(), findOrder.getStatus());
     }
 
@@ -87,11 +88,11 @@ public class PaymentRepositoryTest {
         Payment payment = payments.get(1);
         Payment result = paymentRepository.addPayment(payment.getOrder(), payment.getMethod(), payment.getPaymentData());
         paymentRepository.setId(result, payment.getId());
-        paymentRepository.setStatus(result, "REJECTED");
+        paymentRepository.setStatus(result, PaymentStatus.REJECTED.getValue());
 
         Payment findResult = paymentRepository.getPayment(payments.get(1).getId());
         Order findOrder = findResult.getOrder();
-        assertEquals("FAILED", findOrder.getStatus());
+        assertEquals(PaymentStatus.REJECTED.getValue(), findResult.getStatus());
         assertEquals(OrderStatus.FAILED.getValue(), findOrder.getStatus());
     }
 

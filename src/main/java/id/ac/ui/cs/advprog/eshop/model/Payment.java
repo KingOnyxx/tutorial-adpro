@@ -4,6 +4,8 @@ import lombok.Getter;
 import java.util.Map;
 import java.util.UUID;
 
+import id.ac.ui.cs.advprog.eshop.enums.PaymentStatus;
+
 @Getter 
 public class Payment {
     String id;
@@ -31,7 +33,7 @@ public class Payment {
             this.method = method;
             this.id = UUID.randomUUID().toString();
             this.paymentData = paymentData;
-            this.status = "PENDING";
+            this.status = PaymentStatus.PENDING.getValue();
 
         }
     }
