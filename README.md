@@ -1,3 +1,5 @@
+link: [Click Here](https://tutorial-adpro-kingonyxx.koyeb.app/)
+
 TUTORIAL 1
 ---
 Reflection 1
@@ -51,3 +53,9 @@ Reflection
         * I can't reuse FindById method in different parts of the application.
     - The code is less testable and has more bugs.
         * There will be error because if i didn't seperate them, one of them wouldn't be found when testing.
+
+TUTORIAL 4
+---
+Reflection
+1. In my opinion, this TDD flow is useful because it helps me to write the test first and then write the code. This way, i can focus on the requirements and the expected behavior of the code. It also helps me to write the code that is easy to test and maintain. I can also make sure that the code is working as expected by running the test. This way, i can avoid writing unnecessary code and make sure that the code is working as expected. It helps to do refactoring and make the code cleaner and more readable. It also helps me to find and fix the bugs early in the development process.
+2. In my opinion, the tests have successfully followed the F.I.R.S.T principles because the tests are fast, independent, repeatable, self-validating, and timely. The tests are fast because they are designed with algorithms to be executed quickly. The tests are independent because each tests don't depend on the other tests. The tests are repeatable because they produce the same result every time they are run in any environment. The tests are self-validating because each tests have assertions for boolean output, either they pass or fail. The tests are timely because they are written before the code and run frequently.
