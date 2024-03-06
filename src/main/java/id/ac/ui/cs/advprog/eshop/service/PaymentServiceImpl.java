@@ -15,23 +15,24 @@ public class PaymentServiceImpl implements PaymentService{
     }
 
     @Override
-    public Payment addPayment(Order order, String method, Map<String, String> paymentData) {
-       return null;
+    public Payment addPayment(Order order, String method, Map<String, String> paymentData) {    
+        return paymentRepository.addPayment(order, method, paymentData);
     }
 
     @Override
     public Payment setStatus(Payment payment, String status) {
-        return null;
+        return paymentRepository.setStatus(payment, status);
     }
 
     @Override
     public Payment getPayment(String paymentId) {
-        return null;
+        return paymentRepository.getPayment(paymentId);
     }
 
     @Override
     public List<Payment> getAllPayment() {
-        return null;
+        return paymentRepository.getAllPayment();
+        
     }
 }
 
