@@ -16,14 +16,23 @@ public class Payment {
         if (order == null || method.isEmpty()) {
             throw new IllegalArgumentException();
         }
-        if (paymentData == null) {
-            throw new IllegalArgumentException();
-        } else {
+        if (paymentData != null) {
+            if (method.equals("BANK")) {
+                if (paymentData.get("bankName").isEmpty()) {
+                    throw new IllegalArgumentException();
+                }
+            } else if (method.equals("VOUCHER")) {
+                if (paymentData.get("voucherCode").isEmpty() || !   isVoucherValid(paymentData.get("voucherCode"))) {
+                    throw new IllegalArgumentException();
+                }
+
+            }
             this.order = order;
             this.method = method;
             this.id = UUID.randomUUID().toString();
             this.paymentData = paymentData;
             this.status = "PENDING";
+
         }
     }
 
@@ -33,6 +42,22 @@ public class Payment {
         }
 
         this.status = status;
+    }
+
+    private boolean isVoucherValid(String str) {
+        if (str == null || str.length() != 16) {
+            return false;
+        }
+        if (!str.startsWith("ESHOP")) {
+            return false;
+        }
+        int ctr=0;
+        for (int i = 5; i < 16; i++) {
+            if (Character.isDigit(str.charAt(i))) {
+                ctr++;
+            }
+        }
+        return ctr == 8;
     }
 }
 

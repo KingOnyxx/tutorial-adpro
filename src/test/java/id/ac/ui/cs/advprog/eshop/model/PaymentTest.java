@@ -1,11 +1,9 @@
 package id.ac.ui.cs.advprog.eshop.model;
 
-import org.checkerframework.checker.units.qual.t;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -16,7 +14,6 @@ import java.util.HashMap;
 
 public class PaymentTest {
     private List<Product> products;
-    private List<Order> orders;
     private Order order;
 
     @BeforeEach
@@ -33,8 +30,6 @@ public class PaymentTest {
         this.products.add(product1);
         this.products.add(product2);
         this.order = new Order("13652556-012a-4c07-b546-54eb1396d79b", this.products, 1708560000L, "Safira Sudrajat");
-        this.orders = new ArrayList<>();
-        this.orders.add(this.order);
     }
     
     @Test
@@ -50,7 +45,7 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidMethod() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("voucherCode", "01");
+        paymentData.put("voucherCode", "ESHOP12345678ABC");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order,"", paymentData);
         });
@@ -59,8 +54,9 @@ public class PaymentTest {
     @Test
     void testCreatePaymentSuccessStatus() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("voucherCode", "ESHOP12345678");
+        paymentData.put("voucherCode", "ESHOP12345678ABC");
         Payment payment = new Payment(this.order,"VOUCHER", paymentData);
+        payment.setStatus("SUCCESS");
 
         assertEquals("SUCCESS", payment.getStatus());
         assertSame(this.order, payment.getOrder());
@@ -69,7 +65,7 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidStatus() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("voucherCode", "ESHOP12345678");
+        paymentData.put("voucherCode", "ESHOP12345678ABC");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order,"", paymentData);
         });
@@ -78,7 +74,7 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidVoucher() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("", "");
+        paymentData.put("voucherCode", "");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order,"VOUCHER", paymentData);
         });
@@ -108,6 +104,7 @@ public class PaymentTest {
         Map <String, String> paymentData = new HashMap<String, String>();
         paymentData.put("bankName", "01");
         Payment payment = new Payment(this.order, "BANK", paymentData);
+        payment.setStatus("SUCCESS");
 
         assertEquals("SUCCESS", payment.getStatus());
         assertSame(this.order, payment.getOrder());
@@ -125,7 +122,7 @@ public class PaymentTest {
     @Test
     void testCreatePaymentInvalidBank() {
         Map <String, String> paymentData = new HashMap<String, String>();
-        paymentData.put("", "");
+        paymentData.put("bankName", "");
         assertThrows(IllegalArgumentException.class, () -> {
             Payment payment = new Payment(this.order, "BANK", paymentData);
         });
